@@ -1,4 +1,5 @@
 package org.example;
+import java.util.LinkedList;
 
 /**
  * HashMap is a data structure that stores key-value pairs. It provides constant-time performance for basic operations
@@ -18,11 +19,11 @@ public class HashMap {
     /**
      * Constructs a new HashMap with the specified capacity.
      *
-     * @param capacity The initial capacity of the HashMap.
+     * @param DEFAULT_CAPACITY The initial capacity of the HashMap.
      */
-    public HashMap(int capacity) {
-        this.capacity = capacity;
-        this.map = new LinkedList[capacity];
+    public HashMap(int DEFAULT_CAPACITY) {
+        this.capacity = DEFAULT_CAPACITY;
+        this.map = new LinkedList[DEFAULT_CAPACITY];
         this.size = 0;
     }
 
@@ -34,6 +35,33 @@ public class HashMap {
      */
     private String generateKey(Patient patient) {
         return patient.getFirstName() + patient.getLastName() + patient.getDateOfBirth();
+    }
+
+    private int hashFunction(String key) {
+        int slot = Math.abs(key.hashCode());
+        return slot % capacity;
+    }
+
+    /**
+     * Adds a Patient object to the HashMap.
+     *
+     * @param patient The Patient object to be added.
+     */
+    public void put(Patient patient) {
+        if (patient == null)
+            return;
+        int index = hashFunction(generateKey(patient));
+        if (map[index] == null) {
+            map[index] = new LinkedList<>();
+        }
+
+        for (Patient p : map[index]) {
+            if (p.equals(patient)) {
+                return;
+            }
+        }
+        map[index].add(patient);
+        size++;
     }
 
 
