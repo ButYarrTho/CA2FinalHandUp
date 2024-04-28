@@ -9,15 +9,72 @@ public class Appointment {
     String issue;
     LocalDate date;
     int triageLevel;
-    String doctorFullName;
+    String docFullName;
 
-    public Appointment(String patientFirstName, String patientLastName, LocalDate dateOfBirth, String issue, LocalDate date, int triageLevel, String doctorFullName) {
+
+    public Appointment(String patientFirstName, String patientLastName, LocalDate dateOfBirth, String issue, LocalDate date, int triageLevel, String docFullName) {
         this.patientFirstName = patientFirstName;
         this.patientLastName = patientLastName;
         this.dateOfBirth = dateOfBirth;
         this.issue = issue;
         this.date = date;
         this.triageLevel = triageLevel;
-        this.doctorFullName = doctorFullName;
+        this.docFullName = docFullName;
     }
+    public String getDocFullName() {
+        return docFullName;
+    }
+
+    public void setDocFullName(String docFullName) {
+        this.docFullName = docFullName;
+    }
+
+    public String getPatientFirstName() {
+        return patientFirstName;
+    }
+
+    public void setPatientFirstName(String patientFirstName) {
+        this.patientFirstName = patientFirstName;
+    }
+
+    public String getPatientLastName() {
+        return patientLastName;
+    }
+
+    public void setPatientLastName(String patientLastName) {
+        this.patientLastName = patientLastName;
+    }
+
+    public LocalDate getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(LocalDate dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public String getIssue() {
+        return issue;
+    }
+
+    public void setIssue(String issue) {
+        this.issue = issue;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public int getTriageLevel() {
+        return triageLevel;
+    }
+
+    public void setTriageLevel(int triageLevel) {
+        this.triageLevel = triageLevel;
+    }
+
 }

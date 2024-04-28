@@ -2,11 +2,11 @@ package org.example;
 
 import org.w3c.dom.Node;
 
- class LinkedList<appoinments> {
+ class LinkedList<Appointment> {
 
-    private Node<appoinments> head;
+    private Node<Appointment> head;
 
-    private Node<appoinments> tail;
+    private Node<Appointment> tail;
 
     private int size;
 
@@ -26,28 +26,16 @@ import org.w3c.dom.Node;
        this.size = 0;
     }
 
-    /**
-     * Returns the number of elements in the list
-     * @return The size of the list
-     */
     public int size() {
        return size;
     }
 
-    /**
-     * Checks if the list is empty
-     * @return True if the list is empty false otherwise
-     */
     public boolean isEmpty() {
        return size == 0;
     }
 
-    /**
-     * Adds a new appointment to the end of the list
-     * @param data The appointment to be added
-     */
-    public void add(appoinments data) {
-      Node<appoinments> newNode = new Node<>(data);
+    public void add(Appointment data) {
+      Node<Appointment> newNode = new Node<>(data);
       if(isEmpty()) {
          head = newNode;
          tail = newNode;
@@ -60,19 +48,13 @@ import org.w3c.dom.Node;
 
     }
 
-    /**
-     * Retrieves the appointment at the specified index in the list
-     * @param index The index of the appointment to retrieve
-     * @return The appointment at the specified index
-     * @throws IndexOutOfBoundsException If the index is out of bounds
-     */
-    public appoinments get(int index) {
+    public Appointment get(int index) {
 
        if (index < 0 || index >= size)
        {
           throw new IndexOutOfBoundsException("Out of bounds");
        }
-       Node<appoinments> current = head;
+       Node<Appointment> current = head;
        for (int i = 0; i < index; i++) {
           current = current.next;
        }
@@ -80,18 +62,13 @@ import org.w3c.dom.Node;
     }
 
 
-    /**
-     * Removes the appointment at the specified index from the list
-     * @param index The index of the appointment to remove
-     * @return The removed appointment
-     * @throws IndexOutOfBoundsException If the index is out of bounds
-     */
-    public appoinments remove(int index) {
+
+    public Appointment remove(int index) {
           if (index < 0 || index >= size) {
              throw new IndexOutOfBoundsException("Index out of bounds");
           }
 
-       appoinments DataToBeRemoved;
+       Appointment DataToBeRemoved;
           if (index == 0) {
              DataToBeRemoved = head.data;
              head = head.next;
@@ -99,7 +76,7 @@ import org.w3c.dom.Node;
                 tail = null;
              }
           } else {
-             Node<appoinments> before = head;
+             Node<Appointment> before = head;
              for (int i = 0; i < index - 1; i++) {
                 before = before.next;
              }
@@ -113,15 +90,9 @@ import org.w3c.dom.Node;
           return DataToBeRemoved;
        }
 
-    /**
-     * Displays all appointments in the list.
-     */
+
     public void display()
     {
-       Node<appoinments> current = head;
-       while (current != null) {
-          System.out.println(current.data);
-          current = current.next;
-       }
+
     }
     }
