@@ -26,14 +26,26 @@ import org.w3c.dom.Node;
        this.size = 0;
     }
 
+    /**
+     * Returns the number of elements in the list
+     * @return The size of the list
+     */
     public int size() {
        return size;
     }
 
+    /**
+     * Checks if the list is empty
+     * @return True if the list is empty false otherwise
+     */
     public boolean isEmpty() {
        return size == 0;
     }
 
+    /**
+     * Adds a new appointment to the end of the list
+     * @param data The appointment to be added
+     */
     public void add(appoinments data) {
       Node<appoinments> newNode = new Node<>(data);
       if(isEmpty()) {
@@ -48,6 +60,12 @@ import org.w3c.dom.Node;
 
     }
 
+    /**
+     * Retrieves the appointment at the specified index in the list
+     * @param index The index of the appointment to retrieve
+     * @return The appointment at the specified index
+     * @throws IndexOutOfBoundsException If the index is out of bounds
+     */
     public appoinments get(int index) {
 
        if (index < 0 || index >= size)
@@ -62,7 +80,12 @@ import org.w3c.dom.Node;
     }
 
 
-
+    /**
+     * Removes the appointment at the specified index from the list
+     * @param index The index of the appointment to remove
+     * @return The removed appointment
+     * @throws IndexOutOfBoundsException If the index is out of bounds
+     */
     public appoinments remove(int index) {
           if (index < 0 || index >= size) {
              throw new IndexOutOfBoundsException("Index out of bounds");
@@ -90,9 +113,15 @@ import org.w3c.dom.Node;
           return DataToBeRemoved;
        }
 
-
+    /**
+     * Displays all appointments in the list.
+     */
     public void display()
     {
-
+       Node<appoinments> current = head;
+       while (current != null) {
+          System.out.println(current.data);
+          current = current.next;
+       }
     }
     }
