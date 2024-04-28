@@ -64,5 +64,50 @@ public class HashMap {
         size++;
     }
 
+    /**
+     * Retrieves the LinkedList of patients associated with the given Patient object from the HashMap.
+     *
+     * @param patient The Patient object used to retrieve the associated LinkedList.
+     * @return The LinkedList of patients associated with the given Patient object, or null if not found.
+     */
+    public LinkedList<Patient> get(Patient patient) {
+        if (patient == null)
+            return null;
 
+        int index = hashFunction(generateKey(patient));
+        LinkedList<Patient> bucket = map[index];
+        if (bucket != null) {
+            for (Patient p : bucket) {
+                if (p.equals(patient)) {
+                    return bucket;
+                }
+            }
+        }
+        return null;
     }
+
+    /**
+     * Removes the specified Patient object from the HashMap.
+     *
+     * @param patient The Patient object to be removed.
+     * @return true if the removal is successful, false otherwise.
+     */
+    public boolean remove(Patient patient) {
+        if (patient == null)
+            return false;
+
+        int index = hashFunction(generateKey(patient));
+        LinkedList<Patient> bucket = map[index];
+        if (bucket != null) {
+            for (Patient p : bucket) {
+                if (p.equals(patient)) {
+                    bucket.remove(p);
+                    size--;
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+}
