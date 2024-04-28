@@ -65,5 +65,24 @@ public class App {
         kb.close();
     }
 
+    private static void addPatient(Scanner kb){
+
+    }
+
+    private static void deletePatient(Scanner kb){
+
+    }
+
+    private static void displayPatients() {
+
+    }
+
+    private static void createAppointment(Scanner kb) {
+
+    }
+
+    private static void callNextPatient(Scanner kb) {
+
+    }
     }
 
