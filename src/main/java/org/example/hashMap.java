@@ -179,4 +179,8 @@ public class hashMap {
         }
         return null;
     }
+
+    public LinkedList<Patient>[] getMap() {
+        return map;
+    }
 }

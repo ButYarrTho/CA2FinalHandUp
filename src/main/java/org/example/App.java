@@ -1,6 +1,8 @@
 package org.example;
 import java.time.LocalDate;
 import java.util.Scanner;
+import java.util.Random;
+
 public class App {
 
     private static BoundedPriorityQueue[] queues;
@@ -61,7 +63,7 @@ public class App {
         kb.close();
     }
 
-    private static void addPatient(Scanner kb){
+    private static void addPatient(Scanner kb) {
         System.out.println("Enter patient details:");
         System.out.print("First Name: ");
         String firstName = kb.nextLine();
@@ -82,10 +84,37 @@ public class App {
     }
 
 
+    private static void deletePatient(Scanner kb) {
+        System.out.println("Enter patient details to delete:");
+        System.out.print("First Name: ");
+        String firstName = kb.nextLine();
+        System.out.print("Last Name: ");
+        String lastName = kb.nextLine();
+        System.out.print("Date of Birth (YYYY-MM-DD): ");
+        LocalDate dateOfBirth = LocalDate.parse(kb.nextLine());
 
+        Patient patientToDelete = new Patient(firstName, lastName, dateOfBirth, LocalDate.now());
+        String patientKey = patientHashMap.getKey(patientToDelete);
 
-    private static void deletePatient(Scanner kb){
+        if (patientKey != null) {
+            boolean removed = patientHashMap.remove(patientToDelete);
 
+            if (removed) {
+                handleDeletedPatientAppointments(patientToDelete);
+                System.out.println("Patient deleted successfully.");
+            } else {
+                System.out.println("Failed to delete patient.");
+            }
+        } else {
+            System.out.println("Patient not found.");
+        }
+    }
+
+    private static void handleDeletedPatientAppointments(Patient deletedPatient) {
+        LinkedList<Appointment> appointments = deletedPatient.getAppointments();
+        if (appointments != null) {
+            appointments.remove(appointments.size());
+        }
     }
 
     private static void displayPatients() {
@@ -94,23 +123,26 @@ public class App {
 
     private static void createAppointment(Scanner kb) {
 
-        }
+    }
+
 
 
     private static void callNextPatient(Scanner kb) {
 
-    }
 
-    private static void displaymenu(Scanner kb){
-        System.out.println("\nMenu:");
-        System.out.println("1. Add a new patient");
-        System.out.println("2. Delete a patient");
-        System.out.println("3. Display all patients");
-        System.out.println("4. Create a new appointment for a patient");
-        System.out.println("5. Call the next patient for a doctor");
-        System.out.println("6. Exit");
-        System.out.print("Enter your choice: ");
     }
+        private static void displaymenu (Scanner kb){
+            System.out.println("\nMenu:");
+            System.out.println("1. Add a new patient");
+            System.out.println("2. Delete a patient");
+            System.out.println("3. Display all patients");
+            System.out.println("4. Create a new appointment for a patient");
+            System.out.println("5. Call the next patient for a doctor");
+            System.out.println("6. Exit");
+            System.out.print("Enter your choice: ");
+        }
+
 
 }
+
 
