@@ -118,6 +118,17 @@ public class App {
     }
 
     private static void displayPatients() {
+        System.out.println("List of Patients:");
+        java.util.LinkedList<Patient>[] map = patientHashMap.getMap();
+        if (map != null) {
+            for (java.util.LinkedList<Patient> patients : map) {
+                if (patients != null) {
+                    for (Patient patient : patients) {
+                        System.out.println(patient);
+                    }
+                }
+            }
+        }
 
     }
 
