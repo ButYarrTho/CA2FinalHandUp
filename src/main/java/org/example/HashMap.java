@@ -110,4 +110,73 @@ public class HashMap {
         return false;
     }
 
+    /**
+     * Checks if the HashMap contains the specified key.
+     *
+     * @param key The key to check for existence in the HashMap.
+     * @return true if the key is found, false otherwise.
+     */
+    public boolean containsKey(String key) {
+        if (key == null) {
+            throw new IllegalArgumentException("Key cannot be null");
+        }
+
+        int index = hashFunction(key);
+        LinkedList<Patient> array = map[index];
+        if (array != null) {
+            for (Patient patient : array) {
+                if (generateKey(patient).equals(key)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Retrieves the key associated with the specified Patient object from the HashMap.
+     *
+     * @param patient The Patient object for which to retrieve the key.
+     * @return The key associated with the specified Patient object, or null if not found.
+     */
+    public String getKey(Patient patient) {
+        if (patient == null) {
+            throw new IllegalArgumentException("Patient cannot be null");
+        }
+
+        String patientKey = generateKey(patient);
+        int index = hashFunction(patientKey);
+        LinkedList<Patient> array = map[index];
+        if (array != null) {
+            for (Patient p : array) {
+                if (generateKey(p).equals(patientKey)) {
+                    return patientKey;
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Retrieves the value associated with the specified key from the HashMap.
+     *
+     * @param key The key for which to retrieve the value.
+     * @return The value associated with the specified key, or null if not found.
+     */
+    public LinkedList<Patient> getValue(String key) {
+        if (key == null) {
+            throw new IllegalArgumentException("Key cannot be null");
+        }
+
+        int index = hashFunction(key);
+        LinkedList<Patient> array = map[index];
+        if (array != null) {
+            for (Patient patient : array) {
+                if (generateKey(patient).equals(key)) {
+                    return array;
+                }
+            }
+        }
+        return null;
+    }
 }
