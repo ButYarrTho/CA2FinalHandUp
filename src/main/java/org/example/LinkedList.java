@@ -61,8 +61,6 @@ import org.w3c.dom.Node;
        return current.data;
     }
 
-
-
     public Appointment remove(int index) {
           if (index < 0 || index >= size) {
              throw new IndexOutOfBoundsException("Index out of bounds");

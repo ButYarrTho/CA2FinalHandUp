@@ -5,14 +5,14 @@ import java.util.LinkedList;
  * HashMap is a data structure that stores key-value pairs. It provides constant-time performance for basic operations
  * such as adding, removing, and retrieving elements.
  */
-public class HashMap {
+public class hashMap {
     private static final int DEFAULT_CAPACITY = 103;
 
     private int size;
     private int capacity;
     private LinkedList<Patient>[] map;
 
-    public HashMap() {
+    public hashMap() {
         this(DEFAULT_CAPACITY);
     }
 
@@ -21,7 +21,7 @@ public class HashMap {
      *
      * @param DEFAULT_CAPACITY The initial capacity of the HashMap.
      */
-    public HashMap(int DEFAULT_CAPACITY) {
+    public hashMap(int DEFAULT_CAPACITY) {
         this.capacity = DEFAULT_CAPACITY;
         this.map = new LinkedList[DEFAULT_CAPACITY];
         this.size = 0;
@@ -33,7 +33,7 @@ public class HashMap {
      * @param patient The Patient object for which the key is generated.
      * @return The generated key.
      */
-    private String generateKey(Patient patient) {
+    public String generateKey(Patient patient) {
         return patient.getFirstName() + patient.getLastName() + patient.getDateOfBirth();
     }
 

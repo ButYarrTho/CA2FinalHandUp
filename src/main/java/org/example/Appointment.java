@@ -11,7 +11,6 @@ public class Appointment {
     int triageLevel;
     String docFullName;
 
-
     public Appointment(String patientFirstName, String patientLastName, LocalDate dateOfBirth, String issue, LocalDate date, int triageLevel, String docFullName) {
         this.patientFirstName = patientFirstName;
         this.patientLastName = patientLastName;
@@ -77,4 +76,16 @@ public class Appointment {
         this.triageLevel = triageLevel;
     }
 
+    @Override
+    public String toString() {
+        return "Appointment{" +
+                "patientFirstName='" + patientFirstName + '\'' +
+                ", patientLastName='" + patientLastName + '\'' +
+                ", dateOfBirth=" + dateOfBirth +
+                ", issue='" + issue + '\'' +
+                ", date=" + date +
+                ", triageLevel=" + triageLevel +
+                ", docFullName='" + docFullName + '\'' +
+                '}';
+    }
 }

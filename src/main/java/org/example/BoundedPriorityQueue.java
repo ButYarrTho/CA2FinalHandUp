@@ -6,6 +6,7 @@ public class BoundedPriorityQueue extends LinkedList<Appointment> {
     private int maxSize;
     private String docFullName;
 
+
     public BoundedPriorityQueue (int maxSize, String docFullName ) {
         super();
         this.maxSize = maxSize;
@@ -68,6 +69,22 @@ public class BoundedPriorityQueue extends LinkedList<Appointment> {
         } catch (Exception e) {
             throw new NoSuchElementException("Exception occurred during peek operation: " + e.getMessage());
         }
+    }
+
+    public int getMaxSize() {
+        return maxSize;
+    }
+
+    public void setMaxSize(int maxSize) {
+        this.maxSize = maxSize;
+    }
+
+    public String getDocFullName() {
+        return docFullName;
+    }
+
+    public void setDocFullName(String docFullName) {
+        this.docFullName = docFullName;
     }
 
     @Override
