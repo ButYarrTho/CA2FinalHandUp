@@ -8,47 +8,91 @@ import java.util.LinkedList;
 import static org.junit.Assert.*;
 
 public class Tests {
-    private hashMap hashMap; // Use your custom hashMap class
+    private hashMap hashMap;
 
     @Test
     public void testPutAndGet() {
-        // Initialize the hashMap
         hashMap = new hashMap();
 
-        // Initialize Patient instances
+        // Initialize Patient
         Patient patient1 = new Patient("John", "Doe", LocalDate.of(1990, 5, 15), LocalDate.now());
         Patient patient2 = new Patient("Alice", "Johnson", LocalDate.of(1985, 8, 20), LocalDate.now());
 
-        // Test putting patients into the hashMap
+        // put patients into hashmap
         hashMap.put(patient1);
         hashMap.put(patient2);
 
-        // Test size of the hashMap
+        // test size of hashmap
         assertEquals(2, hashMap.size());
 
-        // Test getting patients from the hashMap
         assertEquals(patient1, hashMap.get(patient1).get(0));
         assertEquals(patient2, hashMap.get(patient2).get(0));
     }
 
     @Test
     public void testRemove() {
-        // Initialize the hashMap
         hashMap = new hashMap();
 
-        // Initialize Patient instance
         Patient patient1 = new Patient("John", "Doe", LocalDate.of(1990, 5, 15), LocalDate.now());
 
-        // Test putting patient into the hashMap
         hashMap.put(patient1);
 
-        // Test if the hashMap contains the patient
+        // test if hashmap has patients
         assertTrue(hashMap.containsKey(patient1.getFirstName() + patient1.getLastName() + patient1.getDateOfBirth()));
 
-        // Test removing patient from the hashMap
+        // test removing patient from the hashMap
         assertTrue(hashMap.remove(patient1));
 
-        // Test if the hashMap no longer contains the patient
         assertFalse(hashMap.containsKey(patient1.getFirstName() + patient1.getLastName() + patient1.getDateOfBirth()));
+    }
+
+    public void testGetValue() {
+        hashMap = new hashMap();
+
+        Patient patient1 = new Patient("John", "Doe", LocalDate.of(1990, 5, 15), LocalDate.now());
+        Patient patient2 = new Patient("Alice", "Johnson", LocalDate.of(1985, 8, 20), LocalDate.now());
+
+        hashMap.put(patient1);
+        hashMap.put(patient2);
+
+        LinkedList<Patient> value1 = hashMap.getValue(hashMap.generateKey(patient1));
+        LinkedList<Patient> value2 = hashMap.getValue(hashMap.generateKey(patient2));
+        assertNotNull(value1);
+        assertNotNull(value2);
+        assertTrue(value1.contains(patient1));
+        assertTrue(value2.contains(patient2));
+
+        LinkedList<Patient> value3 = hashMap.getValue("NonExistentKey");
+        assertNull(value3);
+    }
+
+    @Test
+    public void testGetKey() {
+        hashMap = new hashMap();
+
+        Patient patient = new Patient("John", "Doe", LocalDate.of(1990, 5, 15), LocalDate.now());
+
+        hashMap.put(patient);
+
+        String key = hashMap.getKey(patient);
+        assertNotNull(key);
+        assertEquals(hashMap.generateKey(patient), key);
+
+        Patient nonExistentPatient = new Patient("Non", "Existent", LocalDate.of(2000, 1, 1), LocalDate.now());
+        String nonExistentKey = hashMap.getKey(nonExistentPatient);
+        assertNull(nonExistentKey);
+    }
+
+    @Test
+    public void testContainsKey() {
+        hashMap = new hashMap();
+
+        Patient patient = new Patient("John", "Doe", LocalDate.of(1990, 5, 15), LocalDate.now());
+
+        hashMap.put(patient);
+
+        assertTrue(hashMap.containsKey(hashMap.generateKey(patient)));
+
+        assertFalse(hashMap.containsKey("NonExistentKey"));
     }
 }
