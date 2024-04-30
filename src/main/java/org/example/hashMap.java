@@ -183,4 +183,13 @@ public class hashMap {
     public LinkedList<Patient>[] getMap() {
         return map;
     }
+
+    /**
+     * Returns the number of elements currently stored in the hashmap.
+     *
+     * @return The number of elements in the hashmap.
+     */
+    public int size() {
+        return size;
+    }
 }
