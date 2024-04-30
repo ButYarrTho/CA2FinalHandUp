@@ -8,91 +8,115 @@ import java.util.LinkedList;
 import static org.junit.Assert.*;
 
 public class Tests {
-    private hashMap hashMap;
+
+
+    private BoundedPriorityQueue queue;
 
     @Test
-    public void testPutAndGet() {
-        hashMap = new hashMap();
+    public void testOffer() {
+        // Create appointments
+        Appointment appointment1 = new Appointment("John", "Doe", LocalDate.of(1990, 5, 15), "Checkup", LocalDate.now(), 1, "Dr. Smith");
+        Appointment appointment2 = new Appointment("Alice", "Johnson", LocalDate.of(1985, 8, 20), "Consultation", LocalDate.now(), 2, "Dr. Smith");
 
-        // Initialize Patient
-        Patient patient1 = new Patient("John", "Doe", LocalDate.of(1990, 5, 15), LocalDate.now());
-        Patient patient2 = new Patient("Alice", "Johnson", LocalDate.of(1985, 8, 20), LocalDate.now());
+        assertTrue(queue.offer(appointment1));
+        assertTrue(queue.offer(appointment2));
 
-        // put patients into hashmap
-        hashMap.put(patient1);
-        hashMap.put(patient2);
-
-        // test size of hashmap
-        assertEquals(2, hashMap.size());
-
-        assertEquals(patient1, hashMap.get(patient1).get(0));
-        assertEquals(patient2, hashMap.get(patient2).get(0));
+        assertFalse(queue.offer(new Appointment("Bob", "Smith", LocalDate.of(1975, 10, 10), "Follow-up", LocalDate.now(), 3, "Dr. Smith")));
     }
 
     @Test
-    public void testRemove() {
-        hashMap = new hashMap();
+    public void testRiskyOffer() {
+        // Create appointments
+        Appointment appointment1 = new Appointment("John", "Doe", LocalDate.of(1990, 5, 15), "Checkup", LocalDate.now(), 1, "Dr. Smith");
+        Appointment appointment2 = new Appointment("Alice", "Johnson", LocalDate.of(1985, 8, 20), "Consultation", LocalDate.now(), 2, "Dr. Smith");
 
-        Patient patient1 = new Patient("John", "Doe", LocalDate.of(1990, 5, 15), LocalDate.now());
+        assertTrue(queue.riskyOffer(appointment1));
+        assertTrue(queue.riskyOffer(appointment2));
 
-        hashMap.put(patient1);
-
-        // test if hashmap has patients
-        assertTrue(hashMap.containsKey(patient1.getFirstName() + patient1.getLastName() + patient1.getDateOfBirth()));
-
-        // test removing patient from the hashMap
-        assertTrue(hashMap.remove(patient1));
-
-        assertFalse(hashMap.containsKey(patient1.getFirstName() + patient1.getLastName() + patient1.getDateOfBirth()));
-    }
-
-    public void testGetValue() {
-        hashMap = new hashMap();
-
-        Patient patient1 = new Patient("John", "Doe", LocalDate.of(1990, 5, 15), LocalDate.now());
-        Patient patient2 = new Patient("Alice", "Johnson", LocalDate.of(1985, 8, 20), LocalDate.now());
-
-        hashMap.put(patient1);
-        hashMap.put(patient2);
-
-        LinkedList<Patient> value1 = hashMap.getValue(hashMap.generateKey(patient1));
-        LinkedList<Patient> value2 = hashMap.getValue(hashMap.generateKey(patient2));
-        assertNotNull(value1);
-        assertNotNull(value2);
-        assertTrue(value1.contains(patient1));
-        assertTrue(value2.contains(patient2));
-
-        LinkedList<Patient> value3 = hashMap.getValue("NonExistentKey");
-        assertNull(value3);
+        assertFalse(queue.riskyOffer(new Appointment("Bob", "Smith", LocalDate.of(1975, 10, 10), "Follow-up", LocalDate.now(), 3, "Dr. Smith")));
     }
 
     @Test
-    public void testGetKey() {
-        hashMap = new hashMap();
+    public void testPoll() {
+        // Create appointments
+        Appointment appointment1 = new Appointment("John", "Doe", LocalDate.of(1990, 5, 15), "Checkup", LocalDate.now(), 1, "Dr. Smith");
 
-        Patient patient = new Patient("John", "Doe", LocalDate.of(1990, 5, 15), LocalDate.now());
+        queue.offer(appointment1);
 
-        hashMap.put(patient);
+        Appointment polledAppointment = queue.poll();
 
-        String key = hashMap.getKey(patient);
-        assertNotNull(key);
-        assertEquals(hashMap.generateKey(patient), key);
-
-        Patient nonExistentPatient = new Patient("Non", "Existent", LocalDate.of(2000, 1, 1), LocalDate.now());
-        String nonExistentKey = hashMap.getKey(nonExistentPatient);
-        assertNull(nonExistentKey);
+        assertEquals(appointment1, polledAppointment);
     }
 
     @Test
-    public void testContainsKey() {
-        hashMap = new hashMap();
+    public void testRiskyPoll() {
+        // Create appointments
+        Appointment appointment1 = new Appointment("John", "Doe", LocalDate.of(1990, 5, 15), "Checkup", LocalDate.now(), 1, "Dr. Smith");
 
-        Patient patient = new Patient("John", "Doe", LocalDate.of(1990, 5, 15), LocalDate.now());
+        queue.offer(appointment1);
 
-        hashMap.put(patient);
+        Appointment polledAppointment = queue.riskyPoll();
 
-        assertTrue(hashMap.containsKey(hashMap.generateKey(patient)));
+        assertEquals(appointment1, polledAppointment);
+    }
 
-        assertFalse(hashMap.containsKey("NonExistentKey"));
+    @Test
+    public void testPeek() {
+        // Create appointments
+        Appointment appointment1 = new Appointment("John", "Doe", LocalDate.of(1990, 5, 15), "Checkup", LocalDate.now(), 1, "Dr. Smith");
+
+        queue.offer(appointment1);
+
+        // Peek queue
+        Appointment peekedAppointment = queue.peek();
+
+        assertEquals(appointment1, peekedAppointment);
+    }
+
+    @Test
+    public void testRiskyPeek() {
+        // Create appointments
+        Appointment appointment1 = new Appointment("John", "Doe", LocalDate.of(1990, 5, 15), "Checkup", LocalDate.now(), 1, "Dr. Smith");
+
+        queue.offer(appointment1);
+
+        // Peek queue
+        Appointment peekedAppointment = queue.riskyPeek();
+
+        assertEquals(appointment1, peekedAppointment);
+    }
+
+    @Test
+    public void testIsFull() {
+        // Initially, the queue should be empty
+        assertFalse(queue.isFull());
+
+        queue.offer(new Appointment("John", "Doe", LocalDate.of(1990, 5, 15), "Checkup", LocalDate.now(), 1, "Dr. Smith"));
+        queue.offer(new Appointment("Alice", "Johnson", LocalDate.of(1985, 8, 20), "Consultation", LocalDate.now(), 2, "Dr. Smith"));
+        queue.offer(new Appointment("Bob", "Smith", LocalDate.of(1975, 10, 10), "Follow-up", LocalDate.now(), 3, "Dr. Smith"));
+
+        assertTrue(queue.isFull());
+    }
+
+    @Test
+    public void testSize() {
+        // Initially, the queue should have size 0
+        assertEquals(0, queue.size());
+
+        queue.offer(new Appointment("John", "Doe", LocalDate.of(1990, 5, 15), "Checkup", LocalDate.now(), 1, "Dr. Smith"));
+        queue.offer(new Appointment("Alice", "Johnson", LocalDate.of(1985, 8, 20), "Consultation", LocalDate.now(), 2, "Dr. Smith"));
+
+        assertEquals(2, queue.size());
+    }
+
+    @Test
+    public void testIsEmpty() {
+        // Initially, the queue should be empty
+        assertTrue(queue.isEmpty());
+
+        queue.offer(new Appointment("John", "Doe", LocalDate.of(1990, 5, 15), "Checkup", LocalDate.now(), 1, "Dr. Smith"));
+        queue.offer(new Appointment("Alice", "Johnson", LocalDate.of(1985, 8, 20), "Consultation", LocalDate.now(), 2, "Dr. Smith"));
+
+        assertFalse(queue.isEmpty());
     }
 }
