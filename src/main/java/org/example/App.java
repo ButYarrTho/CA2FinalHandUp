@@ -133,8 +133,41 @@ public class App {
     }
 
     private static void createAppointment(Scanner kb) {
+        System.out.println("Enter appointment details:");
+        System.out.print("Patient's First Name: ");
+        String firstName = kb.nextLine();
+        System.out.print("Patient's Last Name: ");
+        String lastName = kb.nextLine();
+        System.out.print("Patient's Date of Birth (YYYY-MM-DD): ");
+        LocalDate dateOfBirth = LocalDate.parse(kb.nextLine());
+        System.out.print("Issue: ");
+        String issue = kb.nextLine();
+        System.out.print("Appointment Date (YYYY-MM-DD): ");
+        LocalDate appointmentDate = LocalDate.parse(kb.nextLine());
+
+        int triageLevel = generateRandomTriageLevel();
+
+        Patient patient = new Patient(firstName, lastName, dateOfBirth, LocalDate.now());
+
+        patientHashMap.put(patient);
+
+        Appointment appointment = new Appointment(firstName, lastName, dateOfBirth, issue, appointmentDate, triageLevel, "");
+
+        java.util.LinkedList<Patient> patientList = patientHashMap.getValue(patientHashMap.generateKey(patient));
+        if (patientList != null) {
+            patientList.add(patient);
+            System.out.println("Appointment created successfully for patient " + firstName + " " + lastName);
+        } else {
+            System.out.println("Failed to create appointment. Patient not found.");
+        }
 
     }
+    private static int generateRandomTriageLevel () {
+        Random random = new Random();
+        return random.nextInt(5) + 1;
+    }
+
+
 
 
 
