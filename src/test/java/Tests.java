@@ -1,5 +1,5 @@
-package org.example;
-
+import org.example.Appointment;
+import org.example.BoundedPriorityQueue;
 import org.junit.Test;
 
 import java.time.LocalDate;
