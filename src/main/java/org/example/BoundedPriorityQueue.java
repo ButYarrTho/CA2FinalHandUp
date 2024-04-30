@@ -13,6 +13,13 @@ public class BoundedPriorityQueue extends LinkedList<Appointment> {
         this.docFullName = docFullName;
     }
 
+    /**
+     * Offers an appointment to the queue The appointment is added if the queue is not full and
+     * the appointment's doctor's full name matches the queue's doctor's full name
+     *
+     * @param appointment The appointment to be added
+     * @return true if the appointment was added successfully false otherwise
+     */
     public boolean offer(Appointment appointment) {
         if (!appointment.getDocFullName().equalsIgnoreCase(docFullName)) {
             return false;
@@ -24,6 +31,13 @@ public class BoundedPriorityQueue extends LinkedList<Appointment> {
         return false;
     }
 
+    /**
+     * Offers an appointment to the queue throwing an exception if an error occurs during the operation
+     *
+     * @param appointment The appointment to be added
+     * @return true if the appointment was added successfully false otherwise
+     * @throws IllegalStateException if an error occurs during the offer operation
+     */
     public boolean riskyOffer(Appointment appointment) throws IllegalStateException  {
         try {
             if (!appointment.getDocFullName().equalsIgnoreCase(docFullName)) {
@@ -35,11 +49,20 @@ public class BoundedPriorityQueue extends LinkedList<Appointment> {
             throw new IllegalStateException("Exception occurred during offer operation: " + e.getMessage());
         }
     }
-
+    /**
+     * Checks if the queue is full
+     *
+     * @return true if the queue is full false otherwise
+     */
     public boolean isFull() {
         return size() >= maxSize;
     }
 
+    /**
+     * gets and removes the head of the queue or returns null if the queue is empty
+     *
+     * @return The head of the queue, or null if the queue is empty
+     */
     public Appointment poll() {
 
         if (isEmpty()) {
@@ -47,6 +70,13 @@ public class BoundedPriorityQueue extends LinkedList<Appointment> {
         }
         return remove(0);
     }
+
+    /**
+     * gets and removes the head of the queue, throwing an exception if the queue is empty
+     *
+     * @return The head of the queue
+     * @throws NoSuchElementException if the queue is empty
+     */
 
     public Appointment riskyPoll() throws NoSuchElementException {
         try {
@@ -56,6 +86,11 @@ public class BoundedPriorityQueue extends LinkedList<Appointment> {
         }
     }
 
+    /**
+     * gets but does not remove the head of the queue or returns null if the queue is empty
+     *
+     * @return The head of the queue or null if the queue is empty
+     */
     public Appointment peek() {
         if (isEmpty()) {
             return null;
@@ -63,6 +98,12 @@ public class BoundedPriorityQueue extends LinkedList<Appointment> {
         return get(0);
     }
 
+    /**
+     * get but does not remove the head of the queue throwing an exception if the queue is empty
+     *
+     * @return The head of the queue
+     * @throws NoSuchElementException if the queue is empty
+     */
     public Appointment riskyPeek() throws NoSuchElementException {
         try {
             return peek();
