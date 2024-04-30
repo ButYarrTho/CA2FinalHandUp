@@ -62,7 +62,13 @@ public class App {
 
         kb.close();
     }
-
+    /**
+     * Adds a new patient to the system
+     * Prompts the user to enter patient details and creates a new patient object
+     * If the patient already exists, prints a message indicating that the patient already exists
+     *
+     * @param kb The Scanner object for user input
+     */
     private static void addPatient(Scanner kb) {
         System.out.println("Enter patient details:");
         System.out.print("First Name: ");
@@ -83,7 +89,12 @@ public class App {
         }
     }
 
-
+    /**
+     * Deletes a patient from the system
+     * Prompts the user to enter patient details and deletes the patient if found
+     *
+     * @param kb The Scanner object for user input
+     */
     private static void deletePatient(Scanner kb) {
         System.out.println("Enter patient details to delete:");
         System.out.print("First Name: ");
@@ -109,7 +120,12 @@ public class App {
             System.out.println("Patient not found.");
         }
     }
-
+    /**
+     * Handles the deletion of a patient's appointments
+     * Removes the appointments associated with the deleted patient
+     *
+     * @param deletedPatient The Patient object to delete appointments for
+     */
     private static void handleDeletedPatientAppointments(Patient deletedPatient) {
         LinkedList<Appointment> appointments = deletedPatient.getAppointments();
         if (appointments != null) {
@@ -117,6 +133,9 @@ public class App {
         }
     }
 
+    /**
+     * Displays all patients currently registered in the system
+     */
     private static void displayPatients() {
         System.out.println("List of Patients:");
         java.util.LinkedList<Patient>[] map = patientHashMap.getMap();
@@ -132,6 +151,12 @@ public class App {
 
     }
 
+    /**
+     * Creates a new appointment for a patient
+     * Prompts the user to enter appointment details and schedules the appointment
+     *
+     * @param kb The Scanner object for user input
+     */
     private static void createAppointment(Scanner kb) {
         System.out.println("Enter appointment details:");
         System.out.print("Patient's First Name: ");
@@ -158,15 +183,26 @@ public class App {
             patientList.add(patient);
             System.out.println("Appointment created successfully for patient " + firstName + " " + lastName);
         } else {
-            System.out.println("Failed to create appointment. Patient not found.");
+            System.out.println("Failed to create appointment Patient not found");
         }
 
     }
+    /**
+     * Generates a random triage level between 1 and 5
+     *
+     * @return The generated random triage level
+     */
     private static int generateRandomTriageLevel () {
         Random random = new Random();
         return random.nextInt(5) + 1;
     }
 
+    /**
+     * Calls the next patient for a specified doctor
+     * Finds the next appointment in the doctor's queue and displays its details
+     *
+     * @param kb The Scanner object for user input
+     */
     private static void callNextPatient(Scanner kb) {
         System.out.print("Enter doctor's full name: ");
         String doctorFullName = kb.nextLine();
