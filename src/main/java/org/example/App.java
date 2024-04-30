@@ -167,14 +167,29 @@ public class App {
         return random.nextInt(5) + 1;
     }
 
-
-
-
-
     private static void callNextPatient(Scanner kb) {
+        System.out.print("Enter doctor's full name: ");
+        String doctorFullName = kb.nextLine();
 
-
+        for (java.util.LinkedList<Patient> patientList : patientHashMap.getMap()) {
+            for (Patient patient : patientList) {
+                LinkedList<Appointment> appointments = patient.getAppointments();
+                for (int i = 0; i < appointments.size(); i++) {
+                    Appointment appointment = appointments.get(i);
+                    if (appointment.getDocFullName().equalsIgnoreCase(doctorFullName)) {
+                        System.out.println("Next appointment for Doctor " + doctorFullName + ":");
+                        System.out.println(appointment);
+                        return;
+                    }
+                }
+            }
+        }
+        System.out.println("No appointments found for Doctor " + doctorFullName);
     }
+
+
+
+
         private static void displaymenu (Scanner kb){
             System.out.println("\nMenu:");
             System.out.println("1. Add a new patient");
