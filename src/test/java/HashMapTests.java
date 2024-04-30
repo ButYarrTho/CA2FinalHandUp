@@ -1,5 +1,5 @@
-import org.example.Patient;
-import org.example.hashMap;
+import AppData.Patient;
+import Utils.hashMap;
 import org.junit.Test;
 
 import java.time.LocalDate;
@@ -10,7 +10,7 @@ import static org.junit.Assert.assertFalse;
 
 public class HashMapTests {
 
-    private org.example.hashMap hashMap;
+    private Utils.hashMap hashMap;
 
     @Test
     public void testPutAndGet() {

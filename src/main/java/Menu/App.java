@@ -1,4 +1,10 @@
-package org.example;
+package Menu;
+import AppData.Appointment;
+import AppData.Patient;
+import Utils.BoundedPriorityQueue;
+import java.util.LinkedList;
+import Utils.hashMap;
+
 import java.time.LocalDate;
 import java.util.Scanner;
 import java.util.Random;

@@ -1,4 +1,4 @@
-package org.example;
+package AppData;
 import java.time.LocalDate;
 
 public class Appointment {

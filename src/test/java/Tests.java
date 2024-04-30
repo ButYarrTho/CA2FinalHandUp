@@ -1,9 +1,8 @@
-import org.example.Appointment;
-import org.example.BoundedPriorityQueue;
+import AppData.Appointment;
+import Utils.BoundedPriorityQueue;
 import org.junit.Test;
 
 import java.time.LocalDate;
-import java.util.LinkedList;
 
 import static org.junit.Assert.*;
 

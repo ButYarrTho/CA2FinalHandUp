@@ -1,6 +1,8 @@
-package org.example;
+package AppData;
+
 
 import java.time.LocalDate;
+import java.util.LinkedList;
 
 /**
  * Represents a patient with associated appointments.

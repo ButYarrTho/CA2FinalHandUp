@@ -1,4 +1,6 @@
-package org.example;
+package Utils;
+import AppData.Patient;
+
 import java.util.LinkedList;
 
 /**
